@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AUREX - Quản lý Tài chính</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <h1>AUREX - Tài chính thông minh</h1>
+      </div>
+      <div class="month-picker-wrap">
+        <label for="monthPicker">Tháng:</label>
+        <input type="month" id="monthPicker" />
+      </div>
+    </header>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+      <div class="card balance">
+        <h3>Số dư hiện tại</h3>
+        <div class="amount" id="lblBalance">0 ₫</div>
+      </div>
+      <div class="card income">
+        <h3>Tổng thu tháng</h3>
+        <div class="amount" id="lblTotalIncome">0 ₫</div>
+      </div>
+      <div class="card expense">
+        <h3>Tổng chi tháng</h3>
+        <div class="amount" id="lblTotalExpense">0 ₫</div>
+      </div>
+    </div>
+
+    <!-- Thanh tiến trình ngân sách tổng -->
+    <div class="budget-progress">
+      <div class="budget-header">
+        <span class="budget-note" id="lblBudgetStatus">Đang tính toán ngân sách...</span>
+        <span class="budget-percent-badge" id="lblBudgetPercent">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="barBudgetProgress"></div>
+      </div>
+    </div>
+
+    <!-- Main: danh mục + giao dịch -->
+    <div class="main-content">
+
+      <!-- Trái: form + danh sách danh mục -->
+      <div class="col">
+        <section>
+          <h2>Danh Mục Chi Tiêu</h2>
+          <form id="formCategory">
+            <div class="form-group">
+              <label>Tên danh mục</label>
+              <input type="text" id="txtCatName" placeholder="Ví dụ: Ăn uống, Xăng xe..." required />
+            </div>
+            <div class="form-group">
+              <label>Hạn mức (đ)</label>
+              <input type="number" id="numCatLimit" value="0" min="0" required />
+            </div>
+            <button type="submit">Thêm Danh Mục</button>
+          </form>
+        </section>
+
+        <section>
+          <h2>Danh Sách Danh Mục</h2>
+          <div id="divCategoryList" class="list-container"></div>
+        </section>
+      </div>
+
+      <!-- Phải: form + lịch sử giao dịch -->
+      <div class="col">
+        <section>
+          <h2>Giao Dịch Mới</h2>
+          <form id="formTransaction">
+            <div class="form-group">
+              <label>Loại giao dịch</label>
+              <select id="selTxType">
+                <option value="expense">Chi tiêu (−)</option>
+                <option value="income">Thu nhập (+)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Số tiền (đ)</label>
+              <input type="number" id="numTxAmount" min="1" placeholder="Nhập số tiền..." required />
+            </div>
+            <div class="form-group" id="groupTxCategory">
+              <label>Danh mục</label>
+              <select id="selTxCategory"></select>
+            </div>
+            <div class="form-group">
+              <label>Ghi chú</label>
+              <input type="text" id="txtTxNote" placeholder="Ví dụ: Ăn phở, Đổ xăng..." />
+            </div>
+            <div class="form-group">
+              <label>Ngày</label>
+              <input type="date" id="dateTxDate" required />
+            </div>
+            <button type="submit">Lưu Giao Dịch</button>
+          </form>
+        </section>
+
+        <section>
+          <h2>Lịch Sử Giao Dịch</h2>
+          <div id="divTransactionList" class="list-container"></div>
+        </section>
+      </div>
+
+    </div>
+
+    <!-- Bảng tổng hợp các tháng -->
+    <div class="summary-table-section">
+      <h2>Tổng Hợp Tài Chính Các Tháng</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Tháng / Năm</th>
+              <th>Tổng Thu</th>
+              <th>Tổng Chi</th>
+              <th>Tích Lũy</th>
+            </tr>
+          </thead>
+          <tbody id="summaryTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <script type="module" src="/src/app.ts"></script>
+</body>
+
+</html>
